@@ -1,12 +1,14 @@
-import AppDispatcher from '../core/FluxDispatcher.js';
+import {AppDispatcher} from 'react-native-starter';
 
 export default 
 class actions{
 
-	static log(msg){
+	static isMenuOpen(status){
 		AppDispatcher.dispatch({
-			actionType: 'log',
-			message: msg
+			actionType: 'isMenuOpen',
+			args: {
+				value: status
+			}
 		});
 	}
 

@@ -67,7 +67,7 @@ function buildGenericMenuItems(items)
 	return items.map((item, index)=>{
 		return(
 			<MenuItem key={index} onPress={()=>{
-				this.props._openMenu(false)
+				this.props.itemPressed(false)
 				setTimeout(()=>this.props.router.jumpTo(item.route), 300);
 				
 			}} text={item.value} />

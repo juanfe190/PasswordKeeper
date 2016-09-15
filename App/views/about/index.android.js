@@ -7,9 +7,8 @@ import {
 	StyleSheet, 
 	View} from 'react-native';
 
-import Router from '../../core/Router.js';
 import {common} from '../../styles/styles.js';
-import {Button} from '../../core/UImanager.js';
+import {Button, Router} from 'react-native-starter';
 
 export default 
 class AboutView extends Component
@@ -40,7 +39,7 @@ class AboutView extends Component
 		        <Button value="Open menu" 
 			     			style={{}} 
 			     			font={{}}
-			     			onPress={()=>this.props._openMenu(true)}/>
+			     			onPress={()=>this.props.isMenuOpen(true)}/>
 
 		        <Button onPress={()=>Router.jumpBack()} value="Regresar" />
 

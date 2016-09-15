@@ -1,7 +1,4 @@
-import mapper from '../viewMapper.js';
-import {
-	ViewExceptions
-} from './exceptions/RouterExceptions.js';
+import {ViewExceptions} from './exceptions/RouterExceptions.js';
 
 export default
 class Router
@@ -22,6 +19,10 @@ class Router
 		return mapper;
 	}
 
+
+	static register(data){
+		mapper = data;
+	}
 
 
 	/**
@@ -98,3 +99,4 @@ function viewNotInStack(name)
 }
 
 var navigator;
+var mapper;

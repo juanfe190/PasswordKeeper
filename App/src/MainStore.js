@@ -1,34 +1,19 @@
-import AppDispatcher from '../core/FluxDispatcher.js';
-import {EventEmitter} from 'events';
+import {BaseStore} from 'react-native-starter';
 
-const ChangeEvent = 'change';
-var MainStore = Object.assign({}, EventEmitter.prototype,{
-	addChangeListener: function(callback){
-		this.on(ChangeEvent, callback);
-	},
-	removeChangeListener: function(callback){
-		this.removeListener(callback);
-	},
-	emitChange: function(){
-		this.emit(ChangeEvent);
-	},
-
-	getState: function(){
-		//return data;
+class MainStore extends BaseStore
+{
+	constructor(){
+		super();
+		this.state = {
+			isMenuOpen: false
+		}
 	}
-});
 
-
-/**************************************
-************ DISPATCHER ***************
-***************************************/
-AppDispatcher.register(function(action){
-	switch(action.actionType){
-		case 'log':
-			console.log(action.msg);
-			MainStore.emitChange();
-			break;
+	isMenuOpen(args){
+		this.setState({isMenuOpen: args.value})
+		this.emitChange();
 	}
-});
+}
 
-export default MainStore;
+var mainStore = new MainStore();
+export default mainStore;

@@ -8,9 +8,9 @@ import {
 	StyleSheet, 
 	View} from 'react-native';
 
-import Router from '../../core/Router.js';
 import {common} from '../../styles/styles.js';
-import {SideMenu, Button} from '../../core/UImanager.js';
+import actions from '../../src/actions.js';
+import {SideMenu, Button, Router} from 'react-native-starter';
 
 export default
 class MenuSample extends Component
@@ -36,7 +36,7 @@ class MenuSample extends Component
 			     	<Button value="Open menu" 
 			     			style={{}} 
 			     			font={{}}
-			     			onPress={()=>this.props._openMenu(true)}/>
+			     			onPress={()=>actions.isMenuOpen(true)}/>
 			     	
 			     </View>
 		     </View>

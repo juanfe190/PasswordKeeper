@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Router, Button} from 'react-native-starter';
 
 import {
 	AppRegistry, 
@@ -10,8 +11,8 @@ import {
 } from 'react-native';
 
 import {common} from '../../styles/styles.js';
-import Router from '../../core/Router.js';
-import {Button} from '../../core/UImanager.js';
+import actions from '../../src/actions.js';
+import MainStore from '../../src/MainStore.js';
 
 export default 
 class LoginView extends Component
@@ -23,6 +24,7 @@ class LoginView extends Component
 			password: ''
 		}
 	}
+	
 
 	render()
 	{
