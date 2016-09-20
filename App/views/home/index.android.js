@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Router, Button} from 'react-native-starter';
+import {AndroidToolbar} from '../../../react-native-starter/index.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -38,7 +39,7 @@ class LoginView extends Component
 	{
 		return(
 			<View style={{flex: 1}}>
-				
+				<AndroidToolbar menuIconAction={()=>actions.isMenuOpen(true)} />
 				<View style={common.container}>
 					<View style={{alignItems: 'center'}}>
 				        <Text style={common.welcome}>

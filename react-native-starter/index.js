@@ -3,6 +3,7 @@
 ******************************************/
 import Button from './components/button.js';
 import SideMenu from './components/sidemenu.js';
+import AndroidToolbar from './components/androidtoolbar.js';
 
 /*****************************************
 ********* FUNCTIONAL COMPONENTS **********
@@ -14,6 +15,7 @@ import AppDispatcher from './FluxDispatcher.js';
 module.exports = {
 	Button,
 	SideMenu,
+	AndroidToolbar,
 	Router,
 	BaseStore,
 	AppDispatcher
