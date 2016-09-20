@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Router, Button} from 'react-native-starter';
 import {AndroidToolbar} from '../../../react-native-starter/index.js';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
 	AppRegistry, 

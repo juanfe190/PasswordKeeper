@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default 
 class AndroidToolbar extends Component
@@ -10,7 +11,7 @@ class AndroidToolbar extends Component
 
 	render(){
 		return(
-			<View style={[style].concat(this.props.style)}>
+			<View style={[style.wrapper].concat(this.props.style)}>
 				<Icon name="menu" color="white" size={30} onPress={this.props.menuIconAction} />
 			</View>
 		);
@@ -18,10 +19,12 @@ class AndroidToolbar extends Component
 }
 
 const style = StyleSheet.create({
-    backgroundColor: '#e57373',
-    alignSelf: 'stretch',
-    height: 50,
-    top: 0,
-    justifyContent: 'center',
-    padding: 5
+	wrapper: {
+		backgroundColor: '#e57373',
+	    alignSelf: 'stretch',
+	    height: 50,
+	    top: 0,
+	    justifyContent: 'center',
+	    padding: 5
+	}
 });
