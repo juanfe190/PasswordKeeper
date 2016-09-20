@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Router, Button} from 'react-native-starter';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
 	AppRegistry, 
@@ -21,42 +22,55 @@ class LoginView extends Component
 		super(props);
 		this.state = {
 			username: '',
-			password: ''
+			password: '',
+			error: false
 		}
 	}
 	
 
+	login()
+	{
+		if(this.state.username == 'test' && this.state.password == 'test') Router.jumpTo('menu');
+		else this.setState({error: true});
+	}
+
 	render()
 	{
 		return(
-			<View style={common.container}>
-				<View style={{alignItems: 'center'}}>
-			        <Text style={common.welcome}>
-			          Welcome
-			        </Text>
+			<View style={{flex: 1}}>
+				
+				<View style={common.container}>
+					<View style={{alignItems: 'center'}}>
+				        <Text style={common.welcome}>
+				          Welcome
+				        </Text>
 
-			        <TextInput 
-			        	onChangeText={(value)=>this.setState({username: value})} 
-			        	style={common.txtinput}
-			        	placeholder='Username'
-			        />
+				        <TextInput 
+				        	onChangeText={(value)=>this.setState({username: value})} 
+				        	style={common.txtinput}
+				        	placeholder='Username'
+				        />
 
-			        <TextInput 
-			        	onChangeText={(value)=>this.setState({password: value})} 
-			        	style={common.txtinput}
-			        	secureTextEntry={true}
-			        	placeholder='Password'
+				        <TextInput 
+				        	onChangeText={(value)=>this.setState({password: value})} 
+				        	style={common.txtinput}
+				        	secureTextEntry={true}
+				        	placeholder='Password'
 
-			        />
+				        />
 
-			     	<Button value="Log in" 
-			     			style={{}} 
-			     			font={{}}
-			     			onPress={()=>Router.jumpTo('menu')} 
-			     	/>
-			     	
-			     </View>
-		     </View>
+				     	{this.state.error ? <Text>*Datos invalidos</Text> : null}
+
+				     	<Button value="Log in" 
+				     			style={{}} 
+				     			font={{}}
+				     			onPress={this.login.bind(this)} 
+				     	/>
+				     	
+				    </View>
+			    </View>
+			</View>
+			
 		);
 	}
 

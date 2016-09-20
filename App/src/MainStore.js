@@ -10,7 +10,7 @@ class MainStore extends BaseStore
 	}
 
 	isMenuOpen(args){
-		this.setState({isMenuOpen: args.value})
+		this.state['isMenuOpen'] = args.value;
 		this.emitChange();
 	}
 }

@@ -31,6 +31,15 @@ StyleSheet.create({
     borderRadius: 2,
     height: 40,
     justifyContent: 'center'
+  },
+
+  toolbar: {
+    backgroundColor: '#e57373',
+    alignSelf: 'stretch',
+    height: 50,
+    top: 0,
+    justifyContent: 'center',
+    padding: 5
   }
 
 });
