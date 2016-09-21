@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
 export default 
@@ -13,7 +14,8 @@ class MenuItem extends Component
 	{
 		return(
 			<TouchableHighlight style={style.container} onPress={this.props.onPress}>
-				<View>
+				<View style={style.item}>
+					<Icon name={this.props.icon} color={style.text.color} style={style.icon} size={25} />
 					<Text style={style.text}>{this.props.text}</Text>
 				</View>	
 			</TouchableHighlight>
@@ -24,13 +26,21 @@ class MenuItem extends Component
 const style = StyleSheet.create({
  	container: {
  		alignSelf: 'stretch',
- 		padding: 20,
- 		borderBottomWidth: 2,
-    	borderBottomColor: '#252525'
+ 		padding: 15
+ 	},
+
+ 	item: {
+ 		flexDirection: 'row',
+ 		flex: 1,
+ 		alignItems: 'center'
  	},
 
  	text: {
  		marginLeft: 10,
- 		color: '#F5FCFF'
+ 		color: '#333333'
+ 	},
+
+ 	icon: {
+ 		marginRight: 5
  	}
 });

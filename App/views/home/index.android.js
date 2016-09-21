@@ -38,7 +38,9 @@ class LoginView extends Component
 	{
 		return(
 			<View style={{flex: 1}}>
+			
 				<AndroidToolbar menuIconAction={()=>actions.isMenuOpen(true)} />
+				
 				<View style={common.container}>
 					<View style={{alignItems: 'center'}}>
 				        <Text style={common.welcome}>

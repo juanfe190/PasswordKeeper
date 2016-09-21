@@ -17,8 +17,8 @@ class SideMenu extends Component
 	*/
 	mergeStyles(){
 		var style = {
-		  drawer: { shadowColor: '#000000', shadowOpacity: 0.8, shadowRadius: 3, backgroundColor: '#303030'},
-		  main: {paddingLeft: 3},
+		  drawer: { shadowColor: '#000000', shadowOpacity: 0.3, shadowRadius: 3, backgroundColor: '#F5FCFF'},
+		  main: {paddingLeft: 3, backgroundColor: 'black'},
 		}
 
 		var parentStyle = this.props.style || {};
@@ -55,7 +55,10 @@ class SideMenu extends Component
 				panCloseMask={0.2}
 				closedDrawerOffset={-3}
 		        ref={(ref) => this._drawer = ref}
-		        styles={this.mergeStyles()} >
+		        styles={this.mergeStyles()} 
+		        tweenHandler={(ratio) => ({
+					main: { opacity:(2-ratio)/2 }
+				})}>
 					{this.props.children}
 			</Drawer> 
 		)
@@ -66,11 +69,14 @@ function buildGenericMenuItems(items)
 {
 	return items.map((item, index)=>{
 		return(
-			<MenuItem key={index} onPress={()=>{
-				this.props.itemPressed(false)
-				setTimeout(()=>this.props.router.jumpTo(item.route), 300);
-				
-			}} text={item.value} />
+			<MenuItem 
+				key={index} 
+				onPress={()=>{
+					this.props.itemPressed(false)
+					setTimeout(()=>this.props.router.jumpTo(item.route), 300);
+				}} 
+				text={item.value}
+				icon={item.icon} />
 		);
 	});
 

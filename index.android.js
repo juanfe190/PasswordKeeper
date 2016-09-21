@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {AppRegistry, Navigator} from 'react-native';
-import {Router, SideMenu} from 'react-native-starter';
+import {Router} from 'react-native-starter';
+import {SideMenu} from './react-native-starter/index.js';
 import MainStore from './App/src/MainStore.js';
 
 
@@ -53,15 +54,15 @@ class FirstReactApp extends Component {
         items={menuItems}
         itemPressed={(opened)=>this.setState({isMenuOpen: opened})}
       >
-          <Component isMenuOpen={(open)=>this.setState({isMenuOpen: open})} />
+          <Component />
       </SideMenu>
     );
   }
 }
 
 const menuItems = [
-  {value: 'Home', 'route': 'index'},
-  {value: 'About us', 'route': 'about'}
+  {value: 'Home', icon: 'home', 'route': 'index'},
+  {value: 'About us', icon: 'info-outline', 'route': 'about'}
 ];
 
 AppRegistry.registerComponent('ReactTest', () => FirstReactApp);
