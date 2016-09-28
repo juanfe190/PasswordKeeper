@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, ScrollView} from 'react-native';
 import Drawer from 'react-native-drawer';
 import MenuItem from './_sidemenu/menuitem.js';
+import Dimensions from 'Dimensions';
+const {height} = Dimensions.get('window');
 
 export default 
 class SideMenu extends Component
@@ -36,7 +38,7 @@ class SideMenu extends Component
 	*/
 	getMenuContent(){
 		if(Array.isArray(this.props.items)) return buildGenericMenuItems.call(this, this.props.items);
-		else if(this.props.items instanceof Component) return this.props.items;
+		else if(typeof this.props.items === 'function') return this.props.items;
 		else throw new Error("Error: Se esperaba un array o React Component");
 	}
 
@@ -67,17 +69,23 @@ class SideMenu extends Component
 
 function buildGenericMenuItems(items)
 {
-	return items.map((item, index)=>{
+	var list = items.map((Item, index)=>{
+		if(typeof Item === 'function') return <Item key={index}/>;
 		return(
 			<MenuItem 
 				key={index} 
-				onPress={()=>{
-					this.props.itemPressed(false)
-					setTimeout(()=>this.props.router.jumpTo(item.route), 300);
-				}} 
-				text={item.value}
-				icon={item.icon} />
+				onPress={()=>this.props.itemPressed(Item)} 
+				text={Item.value}
+				icon={Item.icon} />
 		);
 	});
+
+	return(
+		<ScrollView 
+			style={{height: height}}>
+			{list}
+		</ScrollView>
+	);
+	
 
 }

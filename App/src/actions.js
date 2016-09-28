@@ -1,4 +1,4 @@
-import {AppDispatcher} from 'react-native-starter';
+import {AppDispatcher} from '../../react-native-starter/index.js';
 
 export default 
 class actions{
@@ -6,9 +6,17 @@ class actions{
 	static isMenuOpen(status){
 		AppDispatcher.dispatch({
 			actionType: 'isMenuOpen',
-			args: {
+			payload: {
 				value: status
 			}
+		});
+	}
+
+
+	static addPassword(){
+		AppDispatcher.dispatch({
+			actionType: 'addPassword',
+			payload: {}
 		});
 	}
 

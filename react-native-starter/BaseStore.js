@@ -9,8 +9,7 @@ class BaseStore extends EventEmitter
 	constructor(){
 		super();
 		AppDispatcher.register((action)=>{
-			if(typeof this[action.actionType] !== 'function') throw new Error("Funcion no registrada en el store: " + action.actionType);
-			this[action.actionType](action.args); 
+			if(typeof this[action.actionType] === 'function') this[action.actionType](action.payload); 
 		});
 	}
 
@@ -28,5 +27,10 @@ class BaseStore extends EventEmitter
 
 	getState(){
 		return this.state;
+	}
+
+	setState(props){
+		this.state = Object.assign({}, this.state, props);
+		this.emitChange();
 	}
 }

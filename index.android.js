@@ -2,35 +2,25 @@ import React, { Component } from 'react';
 import {AppRegistry, Navigator} from 'react-native';
 import {Router} from 'react-native-starter';
 import {SideMenu} from './react-native-starter/index.js';
-import MainStore from './App/src/MainStore.js';
-
-
-import LoginView from './App/views/home/index';
-import AboutView from './App/views/about/index';
-import MenuSample from './App/views/menu/index';
-
-
-var mapper = [
-  {name: 'index', component: LoginView},
-  {name: 'about', component: AboutView},
-  {name: 'menu', component: MenuSample}
-];
+import LayoutStore from './App/src/LayoutStore.js';
+import mapper from './App/viewMapper.js';
+import actions from './App/src/actions.js';
 
 class FirstReactApp extends Component {
 
   constructor(props){
     super(props);
     Router.register(mapper);
-    this.state = MainStore.getState();
+    this.state = LayoutStore.getState();
   }
 
   componentWillMount(){
-    MainStore.addChangeListener(()=>this.setState(MainStore.getState()));
+    LayoutStore.addChangeListener(()=>this.setState(LayoutStore.getState()));
   }
 
 
   componentWillUnmount(){
-    MainStore.removeChangeListener(()=>this.setState(MainStore.getState()));
+    LayoutStore.removeChangeListener(()=>this.setState(LayoutStore.getState()));
   }
 
   render() {
@@ -49,20 +39,19 @@ class FirstReactApp extends Component {
     var Component = route.component;
     return(
       <SideMenu 
-        open={this.state.isMenuOpen} 
+        open={this.state.isMenuOpen}
         router={Router}
-        items={menuItems}
-        itemPressed={(opened)=>this.setState({isMenuOpen: opened})}
+        items={this.state.menuItems}
+        onClose={()=>Router.jumpTo(this.route)}
+        itemPressed={(item)=>{
+          actions.isMenuOpen(false); 
+          this.route = item.route;
+        }}
       >
           <Component />
       </SideMenu>
     );
   }
 }
-
-const menuItems = [
-  {value: 'Home', icon: 'home', 'route': 'index'},
-  {value: 'About us', icon: 'info-outline', 'route': 'about'}
-];
 
 AppRegistry.registerComponent('ReactTest', () => FirstReactApp);
