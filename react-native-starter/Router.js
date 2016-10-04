@@ -40,6 +40,18 @@ class Router
 
 
 	/**
+	* Monta view y reinicia el stack iniciando con dicha ruta 
+	*
+	*/
+	static jumpAndReset(name, params={})
+	{
+		view = findView(name);
+		view['_params'] = params;
+		navigator.resetTo(view);
+	}
+
+
+	/**
 	* Crea o reinicia un view del stack, si el view ya se encuentra en el stack
 	* se perdería la informacion existente
 	*/
@@ -58,7 +70,6 @@ class Router
 	{
 		navigator.jumpBack();
 	}	
-
 
 
 	/**
