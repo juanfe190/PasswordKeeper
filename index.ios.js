@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
-import {AppRegistry, Text, Navigator, TouchableHighlight, View} from 'react-native';
-import Router from './App/core/Router.js';
-import {SideMenu} from './App/core/UImanager.js';
+import {AppRegistry, Navigator} from 'react-native';
+import {Router} from 'react-native-starter';
+import {SideMenu} from './react-native-starter/index.js';
+import LayoutStore from './App/src/LayoutStore.js';
+import mapper from './App/viewMapper.js';
+import actions from './App/src/actions.js';
 
 class FirstReactApp extends Component {
 
   constructor(props){
     super(props);
-    this.state = {
-      isMenuOpen: false
-    }
+    Router.register(mapper);
+    this.state = LayoutStore.getState();
+  }
+
+  componentWillMount(){
+    LayoutStore.addChangeListener(()=>this.setState(LayoutStore.getState()));
+  }
+
+
+  componentWillUnmount(){
+    LayoutStore.removeChangeListener(()=>this.setState(LayoutStore.getState()));
   }
 
   render() {
@@ -28,21 +39,18 @@ class FirstReactApp extends Component {
     var Component = route.component;
     return(
       <SideMenu 
-        open={this.state.isMenuOpen} 
-        onClose={()=>this.setState({isMenuOpen: false})}
-        router={Router}
-        items={menuItems}
-        _openMenu={(open)=>this.setState({isMenuOpen: open})}
+        opened={this.state.isMenuOpen}
+        items={this.state.menuItems}
+        itemPressed={(item)=>{
+          actions.isMenuOpen(false);
+          setTimeout(()=>Router.jumpTo(item.route),300);
+          
+        }}
       >
-          <Component _openMenu={(open)=>this.setState({isMenuOpen: open})} />
+          <Component _params={route._params} />
       </SideMenu>
     );
   }
 }
-
-const menuItems = [
-  {value: 'Home', 'route': 'index'},
-  {value: 'About us', 'route': 'about'}
-];
 
 AppRegistry.registerComponent('ReactTest', () => FirstReactApp);

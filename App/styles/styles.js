@@ -30,6 +30,10 @@ StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  } 
+  },
+
+  txtinput: {
+    height: 35
+  }
 
 });

@@ -37,6 +37,7 @@ class LoginView extends Component
 				        <TextInput 
 				        	onChangeText={(value)=>this.setState({password: value})} 
 				        	style={[common.txtinput, {width: 200}]}
+				        	value={this.state.password}
 				        	secureTextEntry={true}
 				        	placeholder='Password'
 

@@ -31,6 +31,13 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+
+  if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7) {
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.window.clipsToBounds =YES;
+    self.window.frame =  CGRectMake(0,20,self.window.frame.size.width,self.window.frame.size.height-20);
+  }
+  
   return YES;
 }
 
