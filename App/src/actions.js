@@ -20,4 +20,16 @@ class actions{
 		});
 	}
 
+
+	static isAddPickerVisible(status){
+		AppDispatcher.dispatch({
+			actionType: 'isAddPickerVisible',
+			payload: {
+				value: status
+			}
+		});
+	}
+
+
+
 }

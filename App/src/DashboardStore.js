@@ -7,7 +7,31 @@ class DashboardStore extends BaseStore
 		super();
 		this.state = {
 			passwords: [
-				{name:'Name', template: 'Test'}
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
+				{name:'Name', template: 'Test'},
 			]
 		}
 	}

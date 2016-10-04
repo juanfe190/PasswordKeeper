@@ -49,7 +49,7 @@ class SideMenu extends Component
 			<Drawer
 			 	type="overlay"
 			 	captureGestures={false}
-			 	open = {this.props.open}
+			 	open = {this.props.opened}
 			 	onClose={this.props.onClose}
 				content={<View>{this.getMenuContent()}</View>}
 				tapToClose={true}

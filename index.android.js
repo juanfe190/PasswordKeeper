@@ -39,16 +39,19 @@ class FirstReactApp extends Component {
     var Component = route.component;
     return(
       <SideMenu 
-        open={this.state.isMenuOpen}
-        router={Router}
+        opened={this.state.isMenuOpen}
         items={this.state.menuItems}
-        onClose={()=>Router.jumpTo(this.route)}
+        onClose={()=>{
+          actions.isMenuOpen(false);
+          if(this.route) Router.jumpTo(this.route);
+          this.route = false;
+        }}
         itemPressed={(item)=>{
           actions.isMenuOpen(false); 
           this.route = item.route;
         }}
       >
-          <Component />
+          <Component _params={route._params} />
       </SideMenu>
     );
   }

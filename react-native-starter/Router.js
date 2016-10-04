@@ -29,11 +29,12 @@ class Router
 	* Monta view previamente registrada en el navigator sin desmontar
 	* el view, adicionalmente si el view no se encuentra en el stack lo agrega
 	*/
-	static jumpTo(name)
+	static jumpTo(name, params={})
 	{
-		if(viewNotInStack(name)) return this.openView(name);
+		if(viewNotInStack(name)) return this.openView(name, params);
 
 		view = findView(name);
+		view['_params'] = params;
 		navigator.jumpTo(view);
 	}
 
@@ -42,9 +43,10 @@ class Router
 	* Crea o reinicia un view del stack, si el view ya se encuentra en el stack
 	* se perdería la informacion existente
 	*/
-	static openView(name)
+	static openView(name, params={})
 	{
 		view = findView(name);
+		view['_params'] = params;
 		navigator.push(view);
 	}
 
