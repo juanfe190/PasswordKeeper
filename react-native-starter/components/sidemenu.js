@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, ScrollView} from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Dimensions} from 'react-native';
 import Drawer from 'react-native-drawer';
 import MenuItem from './_sidemenu/menuitem.js';
-import Dimensions from 'Dimensions';
 const {height} = Dimensions.get('window');
 
 export default 

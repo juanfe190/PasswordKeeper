@@ -44,6 +44,7 @@ const style = StyleSheet.create({
         alignItems: 'center',
 		height: 40,
 		right: 5,
-		position: 'absolute'
+		position: 'absolute',
+		zIndex: 99
 	}
 });

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 
@@ -13,12 +13,12 @@ class MenuItem extends Component
 	render()
 	{
 		return(
-			<TouchableHighlight style={style.container} onPress={this.props.onPress}>
+			<TouchableOpacity style={style.container} onPress={this.props.onPress}>
 				<View style={style.item}>
 					<Icon name={this.props.icon} color={style.text.color} style={style.icon} size={25} />
 					<Text style={style.text}>{this.props.text}</Text>
 				</View>	
-			</TouchableHighlight>
+			</TouchableOpacity>
 		)
 	}
 }

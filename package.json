@@ -8,6 +8,7 @@
   "dependencies": {
     "events": "^1.1.1",
     "flux": "^2.1.1",
+    "native-base": "^0.5.9",
     "react": "15.3.1",
     "react-native": "0.32.1",
     "react-native-drawer": "^2.3.0",

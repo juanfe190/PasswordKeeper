@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Text, TextInput, TouchableHighlight, View, ScrollView} from 'react-native';
 import {common, colors, size} from '../../styles/styles.js';
 import actions from '../../src/actions.js';
-import {Button, Router} from 'react-native-starter';
+import {Router} from 'react-native-starter';
 import {AndroidToolbar} from '../../../react-native-starter/index.js';
 import {PasswordItem, AddPicker} from './components/mapper.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -44,7 +44,7 @@ class DashboardView extends Component
 					title="Dashboard"
 					menuIconAction={()=>actions.isMenuOpen(true)} 
         			style={{backgroundColor: colors.primary}} 
-        			rightComponent={<Icon name="add" color="white" size={30} onPress={()=>actions.isAddPickerVisible(!this.state.addPickerAnimation.isVisible)} />}
+        			rightComponent={<TouchableHighlight style={{zIndex: 3}} onPress={()=>actions.isAddPickerVisible(!this.state.addPickerAnimation.isVisible)}><Icon name="add" color="white" size={30} /></TouchableHighlight>}
         			color="white"/>
 
 				<View style={[common.clearContainer, {padding: 10}]}>

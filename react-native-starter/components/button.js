@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import {
 	Text, 
-	TouchableHighlight,
+	TouchableOpacity,
 	StyleSheet
 } from 'react-native';
 
@@ -16,11 +16,11 @@ class Button extends Component
 	render()
 	{
 		return(
-			<TouchableHighlight 
+			<TouchableOpacity 
 		 		style={[style.button].concat(this.props.style)}
 		 		onPress={this.props.onPress}>
 		 		<Text style={[style.text].concat(this.props.font)}>{this.props.value}</Text>
-		 	</TouchableHighlight>  
+		 	</TouchableOpacity>  
 		)
 	}
 }

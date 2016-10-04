@@ -19,8 +19,7 @@ class LoginView extends Component
 
 	login()
 	{
-		if(this.state.password == '') Router.jumpTo('dashboard');
-		else this.setState({error: true});
+		Router.jumpTo('dashboard');
 	}
 
 	render()
