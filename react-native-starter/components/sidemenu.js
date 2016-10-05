@@ -18,7 +18,7 @@ class SideMenu extends Component
 	*/
 	mergeStyles(){
 		var style = {
-		  drawer: { shadowColor: '#000000', shadowOpacity: 0.3, shadowRadius: 3, backgroundColor: '#F5FCFF'},
+		  drawer: { shadowColor: '#000000', shadowOpacity: 0.3, shadowRadius: 3, backgroundColor: '#F5FCFF', paddingTop: 20},
 		  main: {paddingLeft: 3, backgroundColor: 'black'},
 		}
 
@@ -37,8 +37,7 @@ class SideMenu extends Component
 	*/
 	getMenuContent(){
 		if(Array.isArray(this.props.items)) return buildGenericMenuItems.call(this, this.props.items);
-		else if(typeof this.props.items === 'function') return this.props.items;
-		else throw new Error("Error: Se esperaba un array o React Component");
+		return this.props.items;
 	}
 
 
@@ -50,7 +49,7 @@ class SideMenu extends Component
 			 	captureGestures={false}
 			 	open = {this.props.opened}
 			 	onClose={this.props.onClose}
-				content={<View>{this.getMenuContent()}</View>}
+				content={this.getMenuContent()}
 				tapToClose={true}
 				openDrawerOffset={0.2} // 20% gap on the right side of drawer
 				panCloseMask={0.2}
@@ -73,6 +72,7 @@ function buildGenericMenuItems(items)
 		return(
 			<MenuItem 
 				key={index} 
+				color={this.props.fontColor || false}
 				onPress={()=>this.props.itemPressed(Item)} 
 				text={Item.value}
 				icon={Item.icon} />

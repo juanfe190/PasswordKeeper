@@ -15,8 +15,8 @@ class MenuItem extends Component
 		return(
 			<TouchableOpacity style={style.container} onPress={this.props.onPress}>
 				<View style={style.item}>
-					<Icon name={this.props.icon} color={style.text.color} style={style.icon} size={25} />
-					<Text style={style.text}>{this.props.text}</Text>
+					<Icon name={this.props.icon} color={this.props.color || style.text.color} style={style.icon} size={25} />
+					<Text style={[style.text, {color: this.props.color || style.text.color}]}>{this.props.text}</Text>
 				</View>	
 			</TouchableOpacity>
 		)
