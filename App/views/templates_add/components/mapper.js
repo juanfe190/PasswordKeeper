@@ -1,5 +1,7 @@
-import TemplateItem from './TemplateItem';
+import TemplateInput from './TemplateInput';
+import AddInputView from './AddInputView';
 
 module.exports = {
-	TemplateItem
+	TemplateInput,
+	AddInputView
 }

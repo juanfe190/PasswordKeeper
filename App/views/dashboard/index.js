@@ -18,10 +18,17 @@ class DashboardView extends Component
 		this.state = Object.assign(DashboardStore.getState(), {}, {addPickerAnimation: LayoutStore.getAnimationState()});
 	}
 
+	_onDashboardChange(){
+		this.setState(DashboardStore.getState());
+	}
 
-	componentWillMount(){
-	    DashboardStore.addChangeListener(()=>this.setState(DashboardStore.getState()));
-	    LayoutStore.addChangeListener(()=>this.setState({addPickerAnimation: LayoutStore.getAnimationState()}));
+	_onLayoutChange(){
+		this.setState({addPickerAnimation: LayoutStore.getAnimationState()});
+	}
+
+	componentDidMount(){
+	    DashboardStore.addChangeListener(()=>this._onDashboardChange);
+	    LayoutStore.addChangeListener(()=>this._onLayoutChange);
 	}
 
 

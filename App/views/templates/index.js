@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import {Router, Button} from 'react-native-starter';
-import {AndroidToolbar} from '../../../react-native-starter/index.js';
+import {AndroidToolbar, Router, Button} from '../../../react-native-starter/index.js';
 import {AppRegistry, Text, View, TextInput, ScrollView} from 'react-native';
 import {common, colors, size} from '../../styles/styles.js';
 import actions from '../../src/actions.js';
@@ -14,15 +13,20 @@ class TemplatesView extends Component
 		super(props);
 		this.state = TemplateStore.getState();
 	}
+
+
+	_onChange(){
+		this.setState(TemplateStore.getState());
+	}
 	
 
-	componentWillMount(){
-	    TemplateStore.addChangeListener(()=>this.setState(TemplateStore.getState()));
+	componentDidMount(){
+	    TemplateStore.addChangeListener(this._onChange);
 	}
 
 
 	componentWillUnmount(){
-	    TemplateStore.removeChangeListener(()=>this.setState(TemplateStore.getState()));
+	    TemplateStore.removeChangeListener(this._onChange);
 	}
 
 	printTemplates(){

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {Router, Button} from 'react-native-starter';
 import {AndroidToolbar} from '../../../react-native-starter/index.js';
-import {AppRegistry, Text, View, TextInput, ScrollView} from 'react-native';
+import {AppRegistry, Text, View, TextInput, Modal, TouchableOpacity} from 'react-native';
 import {common, colors, size} from '../../styles/styles.js';
 import actions from '../../src/actions.js';
 import TemplateStore from '../../src/TemplateStore.js';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Container, Content, List, ListItem, InputGroup, Input, Icon} from 'native-base';
+import {TemplateInput, AddInputView} from './components/mapper.js';
 
 export default 
 class Templates_AddView extends Component
@@ -13,52 +14,70 @@ class Templates_AddView extends Component
 	constructor(props){
 		super(props);
 		this.state = {
-			target: TemplateStore.findTemplate(this.props._params.target)
+			target: TemplateStore.findTemplate('tarjeta-de-credito'),
+			//target: TemplateStore.findTemplate(this.props._params.target)
+			isModalOpen: false
 		};
+	}
+
+
+	_onChange(){
+		this.setState(TemplateStore.getState());
 	}
 	
 
-	componentWillMount(){
-	    TemplateStore.addChangeListener(()=>this.setState(TemplateStore.getState()));
+	componentDidMount(){
+	    TemplateStore.addChangeListener(this._onChange);
 	}
 
 
 	componentWillUnmount(){
-	    TemplateStore.removeChangeListener(()=>this.setState(TemplateStore.getState()));
+	    TemplateStore.removeChangeListener(this._onChange);
 	}
 
 	printInputFields(){
 		return this.state.target.fields.map((item, index)=>{
-			return(
-				<TextInput 
-		        	style={[common.txtinput, {width: 300}]}
-		        	secureTextEntry={item.secureTextEntry || false}
-		        	placeholder={item.options.placeholder || item.title}
-
-		        />
-			)
+			return <TemplateInput item={item} key={index} />
 		});
 	}
 
 	render()
 	{
 		return(
-			<View style={{flex: 1}}>
-				
-				<AndroidToolbar 
-					title="Plantillas"
-					menuIconAction={()=>actions.isMenuOpen(true)} 
-        			style={{backgroundColor: colors.primary}}
-        			rightComponent={<Icon name="add" color="white" size={30} color="white" />} />
+        	<Container style={{backgroundColor: colors.background}}>
+                <Content>
 
-				<View style={[common.clearContainer, {padding: 10, alignItems: 'center'}]}>
+                	<Modal
+			          animationType={"slide"}
+			          transparent={false}
+			          visible={this.state.isModalOpen}
+			          onRequestClose={()=>this.setState({isModalOpen: false})}
+			        >
+			          <AddInputView 
+			          	onCancel={()=>this.setState({isModalOpen: false})} 
+			          	onAccept={(input)=>{
+			          		actions.addInputField(this.state.target.name, input);
+			          		this.setState({isModalOpen: false});
+			          	}}
+			          />
+			        </Modal>
 
-					<ScrollView 
-						style={{height: size.fullHeight}}>
-				        {this.printInputFields()}
-				    </ScrollView>
-			    </View>		
-			</View>
+                	<AndroidToolbar 
+						title="Plantillas"
+						rightComponent={
+							<TouchableOpacity onPress={()=>this.setState({isModalOpen: true})}>
+								<Icon name="ios-add" style={{color: 'white', fontSize: 30, marginRight: 15}} />
+							</TouchableOpacity>	
+							}
+						menuIconAction={()=>actions.isMenuOpen(true)} 
+	        			style={{backgroundColor: colors.primary}} 
+	        		/>
+
+                    <List style={{marginTop: 20}}>
+                        {this.printInputFields()}
+                    </List>
+                </Content>
+            </Container>
 			
 		);
 	}

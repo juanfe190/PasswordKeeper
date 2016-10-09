@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {AppRegistry, Navigator} from 'react-native';
-import {Router} from 'react-native-starter';
-import {SideMenu} from './react-native-starter/index.js';
+import {SideMenu, Router} from './react-native-starter/index.js';
 import LayoutStore from './App/src/LayoutStore.js';
 import mapper from './App/viewMapper.js';
 import actions from './App/src/actions.js';

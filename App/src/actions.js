@@ -30,6 +30,14 @@ class actions{
 		});
 	}
 
-
+	static addInputField(template, input){
+		AppDispatcher.dispatch({
+			actionType: 'addInputField',
+			payload: {
+				'template': template,
+				'input': input
+			}
+		});
+	}
 
 }
