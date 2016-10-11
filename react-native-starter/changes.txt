@@ -1,0 +1,2 @@
+***0.0.6
+-Fix in BaseStore when removing listener from EventEmitter
