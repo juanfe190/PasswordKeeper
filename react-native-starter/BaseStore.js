@@ -18,7 +18,7 @@ class BaseStore extends EventEmitter
 	}
 
 	removeChangeListener(callback){
-		this.removeListener(callback);
+		this.removeListener(ChangeEvent, callback);
 	}
 
 	emitChange(){

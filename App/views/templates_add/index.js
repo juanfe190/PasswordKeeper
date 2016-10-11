@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {Router, Button} from 'react-native-starter';
+import {Router} from 'react-native-starter';
 import {AndroidToolbar} from '../../../react-native-starter/index.js';
 import {AppRegistry, Text, View, TextInput, Modal, TouchableOpacity} from 'react-native';
 import {common, colors, size} from '../../styles/styles.js';
 import actions from '../../src/actions.js';
 import TemplateStore from '../../src/TemplateStore.js';
-import {Container, Content, List, ListItem, InputGroup, Input, Icon} from 'native-base';
+import {Container, Content, List, ListItem, InputGroup, Input, Icon, Button} from 'native-base';
 import {TemplateInput, AddInputView} from './components/mapper.js';
 
 export default 
@@ -27,12 +27,12 @@ class Templates_AddView extends Component
 	
 
 	componentDidMount(){
-	    TemplateStore.addChangeListener(this._onChange);
+	    TemplateStore.addChangeListener(this._onChange.bind(this));
 	}
 
 
 	componentWillUnmount(){
-	    TemplateStore.removeChangeListener(this._onChange);
+	    TemplateStore.removeChangeListener(this._onChange.bind(this));
 	}
 
 	printInputFields(){
@@ -62,7 +62,7 @@ class Templates_AddView extends Component
 			          />
 			        </Modal>
 
-                	<AndroidToolbar 
+                	<AndroidToolbar
 						title="Plantillas"
 						rightComponent={
 							<TouchableOpacity onPress={()=>this.setState({isModalOpen: true})}>
@@ -75,6 +75,14 @@ class Templates_AddView extends Component
 
                     <List style={{marginTop: 20}}>
                         {this.printInputFields()}
+                        <ListItem style={{borderColor: 'transparent'}}>
+                        	<View style={{alignSelf: 'center'}}>
+				                <Button onPress={()=>Router.closeView()} success style={{margin: 10}}>
+			                        <Icon name='ios-checkmark' />
+			                        Guardar
+			                    </Button>
+                        	</View>	
+			            </ListItem>
                     </List>
                 </Content>
             </Container>

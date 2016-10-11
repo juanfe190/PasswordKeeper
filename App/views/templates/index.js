@@ -21,12 +21,12 @@ class TemplatesView extends Component
 	
 
 	componentDidMount(){
-	    TemplateStore.addChangeListener(this._onChange);
+	    TemplateStore.addChangeListener(this._onChange.bind(this));
 	}
 
 
 	componentWillUnmount(){
-	    TemplateStore.removeChangeListener(this._onChange);
+	    TemplateStore.removeChangeListener(this._onChange.bind(this));
 	}
 
 	printTemplates(){

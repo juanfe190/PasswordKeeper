@@ -27,14 +27,14 @@ class DashboardView extends Component
 	}
 
 	componentDidMount(){
-	    DashboardStore.addChangeListener(()=>this._onDashboardChange);
-	    LayoutStore.addChangeListener(()=>this._onLayoutChange);
+	    DashboardStore.addChangeListener(this._onDashboardChange.bind(this));
+	    LayoutStore.addChangeListener(this._onLayoutChange.bind(this));
 	}
 
 
 	componentWillUnmount(){
-	    DashboardStore.removeChangeListener(()=>this.setState(DashboardStore.getState()));
-	    LayoutStore.removeChangeListener(()=>this.setState({addPickerAnimation: LayoutStore.getAnimationState()}));
+	    DashboardStore.removeChangeListener(this._onDashboardChange.bind(this));
+	    LayoutStore.removeChangeListener(this._onLayoutChange.bind(this));
 	}
 
 	printPasswords(){
