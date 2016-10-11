@@ -8,7 +8,7 @@ var options;
 export default
 class Cache 
 {
-	static cacheImage(url, _options = {}, success)
+	static cacheImage(url, success, _options = {})
 	{
 		const extension = extractExtension(url);
 		const filename = md5(url);
@@ -16,20 +16,38 @@ class Cache
 
 		checkCache(filename).then((inCache)=>{
 
-			console.log(inCache);
-			if(!inCache) return createCache(url);
+			if(!inCache || options.forceUpdate) return createCache(url);
 			return recoverCache(url);
 
 		}).then((uri) => {
-			console.log("uri de cacheImage", uri);
 			success(uri);
 		});
 
 	}
 }
 
-async function recoverCache(url){
 
+async function recoverCache(url){
+	const filename = md5(url);
+
+	try {
+
+	  var value = await AsyncStorage.getItem('@cache:' + filename);
+	  value = JSON.parse(value);
+	  
+	  if(expired(value.timestamp, value.expire)) return createCache(url);
+	  return buildUri(value.path);
+
+	} catch (error) {
+	  console.log("Error recovering cache" ,error);
+	}
+}
+
+
+
+function expired(time, expire){
+	var current = new Date().getTime();
+	return (current - time) > time;
 }
 
 
@@ -68,7 +86,7 @@ async function checkCache(name){
 async function createCache(url){
 	const extension = extractExtension(url);
 	const filename = md5(url);
-	const timestamp = new Date();
+	const timestamp = new Date().getTime();
 	const destination = `${dir}/${filename}.${extension}`;
 	try {
 
@@ -94,11 +112,16 @@ async function downloadAndWrite(url, destination){
 	try{
 
 		await RNFS.downloadFile({fromUrl: url, toFile: destination});
-		return {uri: destination};
+		return buildUri(destination);
 
 	}catch(err){
 		console.log("Error downloading file", err);
 	}
+}
+
+
+function buildUri(path){
+	return {uri: 'file://' + path};
 }
 
 
