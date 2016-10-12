@@ -2,30 +2,9 @@ import RNFS from 'react-native-fs';
 import md5 from 'blueimp-md5';
 import {AsyncStorage} from 'react-native';
 
+
 const dir = RNFS.DocumentDirectoryPath;
 var options;
-
-export default
-class Cache 
-{
-	static cacheImage(url, success, _options = {})
-	{
-		const extension = extractExtension(url);
-		const filename = md5(url);
-		options = _options;
-
-		checkCache(filename).then((inCache)=>{
-
-			if(!inCache || options.forceUpdate) return createCache(url);
-			return recoverCache(url);
-
-		}).then((uri) => {
-			success(uri);
-		});
-
-	}
-}
-
 
 async function recoverCache(url){
 	const filename = md5(url);
@@ -43,11 +22,19 @@ async function recoverCache(url){
 	}
 }
 
+function setOptions(_options){
+	options = _options;
+}
 
 
+/**
+* Valida si ya expiro el cache
+*
+* @author Felix Vasquez, Baum Digital
+*/
 function expired(time, expire){
 	var current = new Date().getTime();
-	return (current - time) > time;
+	return (current - time) > expire;
 }
 
 
@@ -102,6 +89,11 @@ async function createCache(url){
 }
 
 
+function uploadProgress(data){
+	var percentage = Math.floor((data.bytesWritten/data.contentLength) * 100);
+  	if(options.onProgress) options.onProgress(percentage);
+}
+
 
 /**
 * Descarga y graba en disco un archivo
@@ -111,7 +103,7 @@ async function createCache(url){
 async function downloadAndWrite(url, destination){
 	try{
 
-		await RNFS.downloadFile({fromUrl: url, toFile: destination});
+		await RNFS.downloadFile({fromUrl: url, toFile: destination, progress: uploadProgress});
 		return buildUri(destination);
 
 	}catch(err){
@@ -125,4 +117,9 @@ function buildUri(path){
 }
 
 
-
+export default {
+	checkCache,
+	recoverCache,
+	createCache,
+	setOptions
+};

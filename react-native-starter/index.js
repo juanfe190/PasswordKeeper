@@ -11,6 +11,7 @@ import AndroidToolbar from './components/androidtoolbar.js';
 import Router from './Router.js';
 import BaseStore from './BaseStore.js';
 import AppDispatcher from './FluxDispatcher.js';
+import Cache from './CacheService.js';
 
 module.exports = {
 	Button,
@@ -18,5 +19,6 @@ module.exports = {
 	AndroidToolbar,
 	Router,
 	BaseStore,
-	AppDispatcher
+	AppDispatcher,
+	Cache
 }

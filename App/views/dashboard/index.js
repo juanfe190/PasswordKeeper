@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import {Text, TextInput, TouchableHighlight, View, ScrollView} from 'react-native';
+import {Text, TextInput, TouchableHighlight, View, ScrollView, Image} from 'react-native';
 import {common, colors, size} from '../../styles/styles.js';
 import actions from '../../src/actions.js';
 import {Router} from 'react-native-starter';
-import {AndroidToolbar} from '../../../react-native-starter/index.js';
+import {AndroidToolbar, Cache} from '../../../react-native-starter/index.js';
 import {PasswordItem, AddPicker} from './components/mapper.js';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DashboardStore from '../../src/DashboardStore.js';
 import LayoutStore from '../../src/LayoutStore.js';
+import {Button} from 'native-base';
 
+const url = 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Big_Bear_Valley,_California.jpg';
 
 export default 
 class DashboardView extends Component
@@ -70,6 +72,12 @@ class DashboardView extends Component
 					<ScrollView 
 						style={{height: size.fullHeight}}>
 				        {this.printPasswords()}
+				        <Image style={{width: 200, height: 200}} source={this.state.image || null} />
+				        <Button onPress={()=>{
+				        	Cache.image(url, (uri)=>this.setState({image: uri}), {forceUpdate: true, expire: 60000, onProgress: (progress)=>console.log(progress)});
+				        }}>
+				        	Descargar
+				        </Button>
 				    </ScrollView>
 			    </View>		        
 		      </View>
