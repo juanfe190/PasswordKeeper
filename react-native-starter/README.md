@@ -64,23 +64,38 @@ Its really easy to use the routing system, you need to use Navigator component f
 ####**Methods**
 **static register(MapperArray)**
 Call this function on the constructor of your index file, it is an array of objects containing your routes. Each object must have two key: 'name' and 'component'
+ 
+ ***params:***
 
-> MapperArray:[
-{
--**name:** *String: Name you will use when you want to move to this view, there is only one reserved name and it is 'index', the view registerd as 'index' will be your initial view*,
--**component:** React Native Component to render
-}
-]
+ - Array:
+	 - Object:
+		 - name: Name you will use when you want to move to this view, there is only one reserved name and it is 'index', the view registerd as 'index' will be your initial view.
+		 - component: React Native Component to render
+
+----------
+
 
 **static setNavigator(Navigator nav)**
 Updates the current state of your navigator, you must pass the second argument retorned in the *renderScene* funcion of the Navigator component
 
+
+----------
+
+
 **static index()**
 Returns the index component
+
+
+----------
+
 
 **static openView(String name, Object params)**
 Opens a new view, if the view was already registered in the stack it will replace it and any state will be reset.
 The *params* object wil be used to pass parameters to the view.
+
+
+----------
+
 
 **static jumpTo(String name, Object params)**
 Moves to a view previously added to the stack, if the view is not in the stack(was never open) it will be opened and added. This is the best option to move to a view. The current state of the view will not be reset.
