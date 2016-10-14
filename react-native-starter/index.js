@@ -12,6 +12,7 @@ import Router from './Router.js';
 import BaseStore from './BaseStore.js';
 import AppDispatcher from './FluxDispatcher.js';
 import Cache from './CacheService.js';
+import ErrorInterceptor from './ErrorInterceptor.js';
 
 module.exports = {
 	Button,
@@ -20,5 +21,6 @@ module.exports = {
 	Router,
 	BaseStore,
 	AppDispatcher,
-	Cache
+	Cache,
+	ErrorInterceptor
 }
